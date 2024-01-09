@@ -1,0 +1,8 @@
+{
+  "custom": {
+    "codecommit": {
+      "providerPlugin": "awscloudformation",
+      "service": "customCDK"
+    }
+  }
+}

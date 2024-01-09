@@ -1,0 +1,119 @@
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App {
+  background-color: #282c34;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#noresults, #loading {
+  display: none;
+}
+
+h1, h2, input, p {
+  font-weight: 400;
+  font-family: sans-serif;
+  margin: 1rem 0;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+input, p {
+  font-size: 1rem;
+}
+
+input {
+  padding: .5rem;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: SteelBlue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 20rem;
+  vertical-align: top;
+}
+
+.result {
+  display: flex;
+}
+
+.movies-container {
+  margin: 0 3rem 1rem 3rem;
+}
+
+.signout .amplify-button:hover {
+  background-color: transparent;
+}
+
+.trailer .amplify-button {
+  color: SteelBlue;
+  padding: 0;
+  background-color: transparent;
+}
+
+.video-player {
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  color: #fff;
+  background-color: #000;
+  position: relative;
+  padding: 0;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: normal;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  word-break: initial;
+  height: 400px;
+}
+
+@media screen and (min-height: 600px) and (max-height: 1000px) {
+  .search-results {
+      padding-bottom: 14vw; /* Corresponds to 10% of the viewport width */
+  }
+}
+
+.MuiInputBase-colorPrimary {
+    border-color: white;
+}
