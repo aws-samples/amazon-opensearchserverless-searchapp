@@ -1,0 +1,12 @@
+{
+  "resourceName": "moviestore",
+  "policyUUID": "b1151b58",
+  "bucketName": "moviesearch0ee8fb3f11bf42ee8d49fe6ee465b1ee",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

@@ -1,8 +1,102 @@
 {
+  "api": {
+    "moviesearchapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "moviesearch56199296"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "moviesearchbf5c44f3": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
   "custom": {
     "codecommit": {
       "providerPlugin": "awscloudformation",
       "service": "customCDK"
+    },
+    "opensearchserverless": {
+      "providerPlugin": "awscloudformation",
+      "service": "customCDK"
+    }
+  },
+  "function": {
+    "moviesearch56199296": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_moviesearch56199296_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "moviesearch56199296"
+        }
+      ]
+    },
+    "AMPLIFY_function_moviesearch56199296_openSearchHost": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "moviesearch56199296"
+        }
+      ]
+    },
+    "AMPLIFY_function_moviesearch56199296_openSearchIndex": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "moviesearch56199296"
+        }
+      ]
+    },
+    "AMPLIFY_function_moviesearch56199296_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "moviesearch56199296"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "moviestore": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     }
   }
 }

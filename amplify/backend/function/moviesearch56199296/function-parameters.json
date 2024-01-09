@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "openSearchHost",
+      "environmentVariableName": "OPEN_SEARCH_HOST"
+    },
+    {
+      "cloudFormationParameterName": "openSearchIndex",
+      "environmentVariableName": "OPEN_SEARCH_INDEX"
+    }
+  ]
+}

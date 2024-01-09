@@ -13,7 +13,25 @@
     },
     "categories": {
       "custom": {
-        "codecommit": {}
+        "codecommit": {},
+        "opensearchserverless": {}
+      },
+      "function": {
+        "moviesearch56199296": {
+          "openSearchHost": "HOST",
+          "openSearchIndex": "INDEX",
+          "deploymentBucketName": "amplify-moviesearch-dev-130138-deployment",
+          "s3Key": "amplify-builds/moviesearch56199296-494f6f6875776a623469-build.zip"
+        }
+      },
+      "auth": {
+        "moviesearchbf5c44f3": {}
+      },
+      "api": {
+        "moviesearchapi": {}
+      },
+      "storage": {
+        "moviestore": {}
       }
     }
   }
