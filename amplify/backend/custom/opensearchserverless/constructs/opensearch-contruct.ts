@@ -50,7 +50,7 @@ export default class OpenSearchConstruct extends Construct {
         name: "movie-data-policy-lambda",
         policy: `[{"Description": "General Access", "Rules":[{"ResourceType":"index","Resource":["index/movie-collection/*"],"Permission":["aoss:*"]}, {"ResourceType":"collection","Resource":["collection/movie-collection"],"Permission":["aoss:*"]}], "Principal":["arn:aws:iam::${cdk.Fn.ref(
           "AWS::AccountId"
-        )}:role/moviesearchLambdaRolec9c3988a-dev"]}]`,
+        )}:role/moviesearchLambdaRoled7c901b3-dev"]}]`,
         type: "data",
       }
     );

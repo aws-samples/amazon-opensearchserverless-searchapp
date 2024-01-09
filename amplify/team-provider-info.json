@@ -18,8 +18,8 @@
       },
       "function": {
         "moviesearch56199296": {
-          "openSearchHost": "HOST",
-          "openSearchIndex": "INDEX",
+          "openSearchHost": "https://18gdw8qa8i748hcsdo3g.us-east-2.aoss.amazonaws.com",
+          "openSearchIndex": "movies",
           "deploymentBucketName": "amplify-moviesearch-dev-130138-deployment",
           "s3Key": "amplify-builds/moviesearch56199296-494f6f6875776a623469-build.zip"
         }
@@ -32,6 +32,12 @@
       },
       "storage": {
         "moviestore": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3ocxza0j6v5ik",
+          "type": "cicd"
+        }
       }
     }
   }
