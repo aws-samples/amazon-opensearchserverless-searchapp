@@ -92,7 +92,7 @@ function App({ signOut }) {
     try {
       const idToken = (await fetchAuthSession()).tokens?.idToken?.toString();
       const params = {
-        apiName: 'movies',
+        apiName: 'moviesearchapi',
         path: '/items',
         options: {
           headers: {
