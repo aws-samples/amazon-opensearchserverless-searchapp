@@ -60,5 +60,8 @@ export default class OpenSearchConstruct extends Construct {
     new cdk.CfnOutput(this, "DashboardEndpoint", {
       value: movieCollection.attrDashboardEndpoint,
     });
+    new cdk.CfnOutput(this, "CollectionEndpoint", {
+      value: movieCollection.attrCollectionEndpoint,
+    });
   }
 }
