@@ -16,10 +16,7 @@
     "s3Key": {
       "Type": "String"
     },
-    "openSearchHost": {
-      "Type": "String"
-    },
-    "openSearchIndex": {
+    "region": {
       "Type": "String"
     }
   },
@@ -75,12 +72,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "OPEN_SEARCH_HOST": {
-              "Ref": "openSearchHost"
-            },
-            "OPEN_SEARCH_INDEX": {
-              "Ref": "openSearchIndex"
             }
           }
         },
@@ -176,44 +167,6 @@
           ]
         }
       }
-    },
-    "CustomLambdaExecutionPolicy": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "custom-lambda-execution-policy",
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Action": [
-                "aoss:APIAccessAll"
-              ],
-              "Resource": [
-                {
-                  "Fn::Sub": [
-                    "arn:aws:aoss:${region}:${account}:collection/18gdw8qa8i748hcsdo3g",
-                    {
-                      "region": {
-                        "Ref": "AWS::Region"
-                      },
-                      "account": {
-                        "Ref": "AWS::AccountId"
-                      }
-                    }
-                  ]
-                }
-              ],
-              "Effect": "Allow"
-            }
-          ]
-        },
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ]
-      },
-      "DependsOn": "LambdaExecutionRole"
     }
   },
   "Outputs": {

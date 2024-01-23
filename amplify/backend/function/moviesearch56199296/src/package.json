@@ -5,7 +5,8 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {
-    "@opensearch-project/opensearch": "2.4.0"
+    "@opensearch-project/opensearch": "2.4.0",
+    "@aws-sdk/client-ssm":"3.496.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.92"

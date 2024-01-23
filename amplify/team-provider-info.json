@@ -14,14 +14,14 @@
     "categories": {
       "custom": {
         "codecommit": {},
-        "opensearchserverless": {}
+        "opensearchserverless": {},
+        "waf01222014": {}
       },
       "function": {
         "moviesearch56199296": {
-          "openSearchHost": "https://18gdw8qa8i748hcsdo3g.us-east-2.aoss.amazonaws.com",
-          "openSearchIndex": "movies",
           "deploymentBucketName": "amplify-moviesearch-dev-130138-deployment",
-          "s3Key": "amplify-builds/moviesearch56199296-494f6f6875776a623469-build.zip"
+          "s3Key": "amplify-builds/moviesearch56199296-384647456b2f796b4156-build.zip",
+          "region": "us-east-2"
         }
       },
       "auth": {

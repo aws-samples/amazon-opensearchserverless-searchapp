@@ -47,6 +47,34 @@
       "service": "customCDK"
     },
     "opensearchserverless": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "Region",
+            "LambdaExecutionRole",
+            "LambdaExecutionRoleArn"
+          ],
+          "category": "function",
+          "resourceName": "moviesearch56199296"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "customCDK"
+    },
+    "waf01222014": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "RootUrl",
+            "ApiName",
+            "ApiId"
+          ],
+          "category": "api",
+          "resourceName": "moviesearchapi"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "customCDK"
     }
@@ -54,6 +82,7 @@
   "function": {
     "moviesearch56199296": {
       "build": true,
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
@@ -74,15 +103,7 @@
         }
       ]
     },
-    "AMPLIFY_function_moviesearch56199296_openSearchHost": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "moviesearch56199296"
-        }
-      ]
-    },
-    "AMPLIFY_function_moviesearch56199296_openSearchIndex": {
+    "AMPLIFY_function_moviesearch56199296_region": {
       "usedBy": [
         {
           "category": "function",

@@ -19,7 +19,9 @@ export type AmplifyDependentResourcesAttributes = {
   },
   "custom": {
     "opensearchserverless": {
-      "OpenSearchConstructDashboardEndpoint86C2E94F": "string"
+      "OpenSearchConstructCollectionEndpointFA724707": "string",
+      "OpenSearchConstructDashboardEndpoint86C2E94F": "string",
+      "OpenSearchConstructIngestionEndpoint62BB58A6": "string"
     }
   },
   "function": {
