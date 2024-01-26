@@ -9,13 +9,15 @@
       "UnauthRoleName": "amplify-moviesearch-dev-130138-unauthRole",
       "StackName": "amplify-moviesearch-dev-130138",
       "StackId": "arn:aws:cloudformation:us-east-2:783132387106:stack/amplify-moviesearch-dev-130138/8559a3d0-af21-11ee-b958-0ab5d038b31d",
-      "AmplifyAppId": "d3ocxza0j6v5ik"
+      "AmplifyAppId": "d3ocxza0j6v5ik",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-moviesearch-dev-130138-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "custom": {
         "codecommit": {},
         "opensearchserverless": {},
-        "waf01222014": {}
+        "waf01222014": {},
+        "moviesearchs3accesslogs": {}
       },
       "function": {
         "moviesearch56199296": {
@@ -27,9 +29,6 @@
       "auth": {
         "moviesearchbf5c44f3": {}
       },
-      "api": {
-        "moviesearchapi": {}
-      },
       "storage": {
         "moviestore": {}
       },
@@ -38,6 +37,9 @@
           "appId": "d3ocxza0j6v5ik",
           "type": "cicd"
         }
+      },
+      "api": {
+        "moviesearchapi": {}
       }
     }
   }

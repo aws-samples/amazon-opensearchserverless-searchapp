@@ -20,12 +20,17 @@
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
+        "mfaConfiguration": "ON",
         "mfaTypes": [
           "SMS"
         ],
         "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [],
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS"
+          ],
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
@@ -34,7 +39,7 @@
         "socialProviders": [],
         "usernameAttributes": [],
         "verificationMechanisms": [
-          "EMAIL"
+          "PHONE_NUMBER"
         ]
       },
       "providerPlugin": "awscloudformation",
@@ -43,6 +48,10 @@
   },
   "custom": {
     "codecommit": {
+      "providerPlugin": "awscloudformation",
+      "service": "customCDK"
+    },
+    "moviesearchs3accesslogs": {
       "providerPlugin": "awscloudformation",
       "service": "customCDK"
     },
@@ -92,48 +101,6 @@
       "lastPushTimeStamp": "2024-01-09T21:01:26.617Z",
       "service": "amplifyhosting",
       "type": "cicd"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_moviesearch56199296_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "moviesearch56199296"
-        }
-      ]
-    },
-    "AMPLIFY_function_moviesearch56199296_region": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "moviesearch56199296"
-        }
-      ]
-    },
-    "AMPLIFY_function_moviesearch56199296_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "moviesearch56199296"
-        }
-      ]
-    },
-    "AMPLIFY_hosting_amplifyhosting_appId": {
-      "usedBy": [
-        {
-          "category": "hosting",
-          "resourceName": "amplifyhosting"
-        }
-      ]
-    },
-    "AMPLIFY_hosting_amplifyhosting_type": {
-      "usedBy": [
-        {
-          "category": "hosting",
-          "resourceName": "amplifyhosting"
-        }
-      ]
     }
   },
   "storage": {

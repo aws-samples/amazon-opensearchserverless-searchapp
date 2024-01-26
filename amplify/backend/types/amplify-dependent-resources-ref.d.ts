@@ -10,6 +10,7 @@ export type AmplifyDependentResourcesAttributes = {
     "moviesearchbf5c44f3": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
+      "CreatedSNSRole": "string",
       "IdentityPoolId": "string",
       "IdentityPoolName": "string",
       "UserPoolArn": "string",
@@ -18,6 +19,10 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "custom": {
+    "moviesearchs3accesslogs": {
+      "AccessLogBucketArn": "string",
+      "AccessLogBucketName": "string"
+    },
     "opensearchserverless": {
       "OpenSearchConstructCollectionEndpointFA724707": "string",
       "OpenSearchConstructDashboardEndpoint86C2E94F": "string",

@@ -38,11 +38,11 @@ export class cdkStack extends cdk.Stack {
 
   private createAndAssociateWaf(apiId: string) {
     const apiIpset = new wafv2.CfnIPSet(this, "ipset", {
-      addresses: ["108.236.149.123/32"],
+      addresses: ["108.236.149.123/32","24.17.113.163/32"],
       ipAddressVersion: "IPV4",
       scope: "REGIONAL",
       description: "Allowed IP addresses.",
-      name: "movies-ipsetV4",
+      name: "movies-search-ipsetV4",
     });
 
     const ipRule: wafv2.CfnWebACL.RuleProperty = {

@@ -5,7 +5,10 @@
       "name": "/items",
       "lambdaFunction": "moviesearch56199296",
       "permissions": {
-        "setting": "open"
+        "setting": "private",
+        "auth": [
+          "read"
+        ]
       }
     }
   }
