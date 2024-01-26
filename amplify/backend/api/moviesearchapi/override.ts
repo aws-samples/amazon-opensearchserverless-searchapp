@@ -71,11 +71,11 @@ export function override(
   const logGroup = new logs.LogGroup(resources.restApi, "AccessLogs", {
     retention: 60,
   });
-  resources.deploymentResource.addPropertyOverride("StageDescription", {
-    LoggingLevel : "INFO",
-    MetricsEnabled: true,
-    AccessLogSetting: {
-      DestinationArn: logGroup.logGroupArn,
-    },
-  });
+//   resources.deploymentResource.addPropertyOverride("StageDescription", {
+//     LoggingLevel : "INFO",
+//     MetricsEnabled: true,
+//     AccessLogSetting: {
+//       DestinationArn: logGroup.logGroupArn,
+//     },
+//   });
 }
