@@ -39,6 +39,7 @@ exports.handler = async (event, context) => {
     const client = getOSClient(region, collectionEndpoint);
     const query = {
       size: event.queryStringParameters?.size || 25,
+      from: event.queryStringParameters?.from || 0,
       query: {
         multi_match: {
           query: queryParam,
