@@ -1,5 +1,20 @@
 {
-  "api": {},
+  "api": {
+    "moviesearchapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "moviesearch56199296"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "moviesearchbf5c44f3": {
       "customAuth": false,
@@ -50,6 +65,10 @@
           "resourceName": "moviesearch56199296"
         }
       ],
+      "providerPlugin": "awscloudformation",
+      "service": "customCDK"
+    },
+    "waf01222014": {
       "providerPlugin": "awscloudformation",
       "service": "customCDK"
     }
