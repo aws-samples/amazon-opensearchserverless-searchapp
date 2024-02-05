@@ -44,3 +44,8 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+amplify/backend/custom/codecommit/package-lock.json
+amplify/backend/custom/opensearchserverless/package-lock.json
+amplify/backend/custom/waf01222014/package-lock.json
+amplify/backend/package-lock.json
+amplify/backend/function/moviesearch56199296/src/package-lock.json

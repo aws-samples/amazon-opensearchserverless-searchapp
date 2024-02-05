@@ -1,11 +1,4 @@
 export type AmplifyDependentResourcesAttributes = {
-  "api": {
-    "moviesearchapi": {
-      "ApiId": "string",
-      "ApiName": "string",
-      "RootUrl": "string"
-    }
-  },
   "auth": {
     "moviesearchbf5c44f3": {
       "AppClientID": "string",
@@ -19,10 +12,6 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "custom": {
-    "moviesearchaccesslogs01262014": {
-      "AccessLogBucketArn": "string",
-      "AccessLogBucketName": "string"
-    },
     "opensearchserverless": {
       "OpenSearchConstructCollectionEndpointFA724707": "string",
       "OpenSearchConstructDashboardEndpoint86C2E94F": "string",

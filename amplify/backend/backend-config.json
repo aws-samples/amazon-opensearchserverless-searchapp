@@ -1,20 +1,5 @@
 {
-  "api": {
-    "moviesearchapi": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "moviesearch56199296"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    }
-  },
+  "api": {},
   "auth": {
     "moviesearchbf5c44f3": {
       "customAuth": false,
@@ -63,21 +48,6 @@
           ],
           "category": "function",
           "resourceName": "moviesearch56199296"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "customCDK"
-    },
-    "waf01222014": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "RootUrl",
-            "ApiName",
-            "ApiId"
-          ],
-          "category": "api",
-          "resourceName": "moviesearchapi"
         }
       ],
       "providerPlugin": "awscloudformation",
