@@ -3,25 +3,17 @@ import {
   AmplifyS3ResourceTemplate,
 } from "@aws-amplify/cli-extensibility-helper";
 import * as cdk from "aws-cdk-lib";
-import * as AmplifyHelpers from "@aws-amplify/cli-extensibility-helper";
-import { AmplifyDependentResourcesAttributes } from "../../types/amplify-dependent-resources-ref";
+import * as s3 from "aws-cdk-lib/aws-s3";
 
 export function override(
   resources: AmplifyS3ResourceTemplate,
   amplifyProjectInfo: AmplifyProjectInfo
 ) {
-  // const dependencies: AmplifyDependentResourcesAttributes =
-  //   AmplifyHelpers.addResourceDependency(this, "storage", "moviestore", [
-  //     {
-  //       category: "api",
-  //       resourceName: "moviesearchapi",
-  //     },
-  //   ]);
-  
-  // const accesslogBucketName = cdk.Fn.ref("AccessLogBucketName");
-
-  resources.s3Bucket.loggingConfiguration = {
-    destinationBucketName: "amplify-moviesearch-dev-13-accesslogbucketda470295-41dg3up2lc7a",
-    logFilePrefix: "movie-search"
-  }
+  // const bucket = new s3.Bucket(this, "AccessLogBucket", {
+  //   blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+  //   encryption: s3.BucketEncryption.S3_MANAGED,
+  //   enforceSSL: true,
+  //   versioned: true,
+  //   removalPolicy: cdk.RemovalPolicy.DESTROY,
+  // });
 }

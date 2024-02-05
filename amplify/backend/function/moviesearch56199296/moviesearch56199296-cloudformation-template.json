@@ -83,7 +83,8 @@
         },
         "Runtime": "nodejs20.x",
         "Layers": [],
-        "Timeout": 25
+        "Timeout": 25,
+        "ReservedConcurrentExecutions": 10
       }
     },
     "LambdaExecutionRole": {

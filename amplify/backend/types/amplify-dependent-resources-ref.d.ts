@@ -19,7 +19,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "custom": {
-    "moviesearchs3accesslogs": {
+    "moviesearchaccesslogs01262014": {
       "AccessLogBucketArn": "string",
       "AccessLogBucketName": "string"
     },

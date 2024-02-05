@@ -16,8 +16,7 @@
       "custom": {
         "codecommit": {},
         "opensearchserverless": {},
-        "waf01222014": {},
-        "moviesearchs3accesslogs": {}
+        "waf01222014": {}
       },
       "function": {
         "moviesearch56199296": {
