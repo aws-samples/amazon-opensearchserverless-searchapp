@@ -29,7 +29,10 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     borderRadius: "20px",
   },
   label: { color: theme.palette.primary.light, fontWeight: "bold" },
-  input: { color: theme.palette.primary.light, fontWeight: "bold" },
+  input: {
+    color: theme.palette.primary.light,
+    fontWeight: "bold",
+  },
 }));
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -43,6 +46,12 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }));
 
 const SearchBox = ({ search, isLoading, isError, setSearch, handleSubmit }) => {
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   return (
     <div className="search-container">
       <StyledTitle>Movie Finder</StyledTitle>
@@ -53,6 +62,8 @@ const SearchBox = ({ search, isLoading, isError, setSearch, handleSubmit }) => {
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyPress={handleKeyPress}
+          autoComplete="off"
         />
         <Button
           className="search-button"

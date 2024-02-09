@@ -82,11 +82,10 @@ img {
   height: 400px;
 }
 
-@media screen and (min-height: 600px) and (max-height: 1000px) {
+/* @media screen and (min-height: 600px) and (max-height: 1000px) {
   .search-results {
-      padding-bottom: 14vw; /* Corresponds to 10% of the viewport width */
   }
-}
+} */
 
 .MuiInputBase-colorPrimary {
     border-color: white;
