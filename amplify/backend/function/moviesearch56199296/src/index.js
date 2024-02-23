@@ -35,6 +35,8 @@ exports.handler = async (event, context) => {
     }
     const queryParam = event.queryStringParameters.query
     const region = process.env.REGION;
+    const sortOption = event.queryStringParameters?.sortOption;
+    const sortOrder = event.queryStringParameters?.sortOrder; 
 
     const client = getOSClient(region, collectionEndpoint);
     const query = {
@@ -47,6 +49,16 @@ exports.handler = async (event, context) => {
         }
       }
     };
+
+    if (sortField && sortOrder) {
+      query.sort = [
+        {
+          [sortOption]: {
+            order: sortOrder
+          }
+        }
+      ];
+    }
 
     const response = await client.search({
       index: collectionIndex,
