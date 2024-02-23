@@ -50,7 +50,7 @@ exports.handler = async (event, context) => {
       }
     };
 
-    if (sortField && sortOrder) {
+    if (sortOption && sortOrder) {
       query.sort = [
         {
           [sortOption]: {

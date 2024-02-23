@@ -16,10 +16,13 @@ This prototype project is intended to show a way to implement multi dimensional 
 - Repeat the dependency installation in these folders  - amplify/backend/custom/opensearchserverless, amplify/backend/custom/waf01222014
   and amplify/backend/function/moviesearch56199296
 - Run `amplify init` command to initialize the [amplify](https://docs.amplify.aws/javascript/tools/cli/start/key-workflows/#amplify-init) project based on the contents of the directory.
+- Update the ip-address of your machine in the WAF rules to allow traffic from the ip-set [here](amplify/backend/custom/waf01222014/cdk-stack.ts)(line 41).
 - Run `amplify push` to build and deploy the backend resources, resource list would be as below.
     ![Alt text](project_assets/aws_cli_push.png)
 
   After successful deployment, the resource metadata will be saved in <B>amplify-meta.json</B>
+  
+  Manually upload some movie trailers into S3 matching their id.
 
 ### Frontend
 - From the project's root folder, run `npm install` to install the frontend dependencies.
@@ -34,11 +37,17 @@ Add a WAF to mitigate common web threats and protect cloudfront distribution by 
 ![Alt text](project_assets/architecture.png)
 - <B>Front End Application</B> is a react application which is hosted on a cloudfront distributed S3 bucket. The application uses [Amplify UI](https://ui.docs.amplify.aws/) which is a collection of react components that can connect directly to the cloud. We use the Authenticator component of amplify UI to enable authentication flows like sign-up, sign-in, sign-out and works seamlessly with amplify CLI to connect with AWS Cognito. Cloud distribution is protected from common web threats by adding a [WAF](https://aws.amazon.com/blogs/networking-and-content-delivery/mitigate-common-web-threats-with-one-click-in-amazon-cloudfront/)
 - <B>Authentication</B>: Application access is controlled using [Amazon Cognito](https://aws.amazon.com/cognito/), it provides a robust set of APIs to build a self-registration solution. We use the Cognito User pools to securely store user profile data recieved from the sign-up page. Multi-factor authentication (MFA) is configured in the user pool and application users can verify their identities using Time-based One-time Password (TOTP) generator, such as Google Authenticator.
-- <B>Backend Application</B>:
-## Data Ingestion
-  The sample [movie data](project_assets/movies-data.json) is ingested into Open Search Serverless Collection. The custom CDK resouce - [opensearchserverless](amplify/backend/custom/opensearchserverless/constructs/opensearch-contruct.ts) creates the collection, dataaccess policy, network policy and the pipeline for data ingestion into `Movies` index. The output from the cdk resource creation includes endpoints for ingestion, collection and dashboard. Replace the ingestion url and region in the below snapshot and execute the awscurl command to save data into collection. 
-    <img src="project_assets/data_ingestion.png" alt="drawing" style="width:300px;"/>
+- <B>Backend Application</B>: AWS APIgateway service is used to create an endpoint to fetch search result, it is integrated with a lambda and uses cognito authorizer to authenticate the incoming requests. It is also protected by WAF with rule configured to allow traffic from a set of ip-address. The lambda takes in the search text, converts into `domain-specific language (DSL)` query and invokes the open search collection endpoint. The result from opensearch query is returned back to the application. Open search serverless service automatically provisions and continually adjusts to get fast data ingestion rates and millisecond response times for searches. The movie trailers are saved in the S3 and accessed from the application using presigned urls. (This prototype project uses S3 for trailers, its a pattern to demo the file download capability based on search result details).  
 
+## Data Ingestion
+  The sample [movie data](project_assets/movies-data.json) is ingested into Open Search Serverless Collection. The custom CDK resouce - [opensearchserverless](amplify/backend/custom/opensearchserverless/constructs/opensearch-contruct.ts) creates the collection, dataaccess policy, network policy and the pipeline for data ingestion into `Movies` index. The output from the cdk resource creation includes endpoints for ingestion, collection and dashboard. Replace the ingestion endpoint and region in the below snippet and execute the awscurl command to save data into collection.
+  ```
+   awscurl --service osis --region <region> \                         
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d "@project_assets/movies-data.json" \
+    https://<ingest_url>/movie-ingestion/data
+  ```
   You should see a `200 OK` response.
 
 ## Application Flow
