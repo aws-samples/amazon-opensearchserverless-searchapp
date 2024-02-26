@@ -21,8 +21,6 @@ This prototype project is intended to show a way to implement multi dimensional 
     ![Alt text](project_assets/aws_cli_push.png)
 
   After successful deployment, the resource metadata will be saved in <B>amplify-meta.json</B>
-  
-  Manually upload some movie trailers into S3 matching their id.
 
 ### Frontend
 - From the project's root folder, run `npm install` to install the frontend dependencies.
@@ -40,15 +38,17 @@ Add a WAF to mitigate common web threats and protect cloudfront distribution by 
 - <B>Backend Application</B>: AWS APIgateway service is used to create an endpoint to fetch search result, it is integrated with a lambda and uses cognito authorizer to authenticate the incoming requests. It is also protected by WAF with rule configured to allow traffic from a set of ip-address. The lambda takes in the search text, converts into `domain-specific language (DSL)` query and invokes the open search collection endpoint. The result from opensearch query is returned back to the application. Open search serverless service automatically provisions and continually adjusts to get fast data ingestion rates and millisecond response times for searches. The movie trailers are saved in the S3 and accessed from the application using presigned urls. (This prototype project uses S3 for trailers, its a pattern to demo the file download capability based on search result details).  
 
 ## Data Ingestion
-  The sample [movie data](project_assets/movies-data.json) is ingested into Open Search Serverless Collection. The custom CDK resouce - [opensearchserverless](amplify/backend/custom/opensearchserverless/constructs/opensearch-contruct.ts) creates the collection, dataaccess policy, network policy and the pipeline for data ingestion into `Movies` index. The output from the cdk resource creation includes endpoints for ingestion, collection and dashboard. Replace the ingestion endpoint and region in the below snippet and execute the awscurl command to save data into collection.
-  ```
-   awscurl --service osis --region <region> \                         
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d "@project_assets/movies-data.json" \
-    https://<ingest_url>/movie-ingestion/data
-  ```
-  You should see a `200 OK` response.
+  - The sample [movie data](project_assets/movies-data.json) is ingested into Open Search Serverless Collection. The custom CDK resouce - [opensearchserverless](amplify/backend/custom/opensearchserverless/constructs/opensearch-contruct.ts) creates the collection, dataaccess policy, network policy and the pipeline for data ingestion into `Movies` index. The output from the cdk resource creation includes endpoints for ingestion, collection and dashboard. Replace the ingestion endpoint and region in the below snippet and execute the awscurl command to save data into collection.
+    ```
+    awscurl --service osis --region <region> \                         
+      -X POST \
+      -H "Content-Type: application/json" \
+      -d "@project_assets/movies-data.json" \
+      https://<ingest_url>/movie-ingestion/data
+    ```
+    You should see a `200 OK` response.
+
+  - Optional Step : Log into AWS console and select S3 service, open the trailer S3 bucket(created as part of backend deployment) and upload some movie trailers. Ensure that the file name matches the id field in sample [movie data](project_assets/movies-data.json) (ex:"tt1981115.mp4", "tt0800369.mp4", "tt0172495.mp4"). Uploading a trailer with id "tt0172495.mp4" is used as the default trailer for all movies, without having to upload one for each movie. If this step is ommited , the `movie trailer` functionality will not work.
 
 ## Application Flow
 ### Create User Account
