@@ -103,14 +103,6 @@
         }
       ]
     },
-    "AMPLIFY_function_moviesearch56199296_region": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "moviesearch56199296"
-        }
-      ]
-    },
     "AMPLIFY_function_moviesearch56199296_s3Key": {
       "usedBy": [
         {

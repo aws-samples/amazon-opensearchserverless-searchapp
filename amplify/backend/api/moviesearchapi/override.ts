@@ -4,6 +4,7 @@ import {
   AmplifyProjectInfo,
 } from "@aws-amplify/cli-extensibility-helper";
 import * as logs from "aws-cdk-lib/aws-logs";
+import * as iam from "aws-cdk-lib/aws-iam";
 
 export function override(
   resources: AmplifyApiRestResourceStackTemplate,
@@ -66,18 +67,5 @@ export function override(
       `Body.paths.${path}.x-amazon-apigateway-any-method.security`,
       [{ Cognito: [] }]
     );
-  }
-
-  const logGroup = new logs.LogGroup(resources.restApi, "AccessLogs", {
-    retention: 30,
-  });
-
-  resources.deploymentResource.addPropertyOverride("StageDescription", {
-    LoggingLevel : "INFO",
-    MetricsEnabled: true,
-    AccessLogSetting: {
-      DestinationArn: logGroup.logGroupArn,
-      Format: '{ "requestId": "$context.requestId", "path": "$context.path", "routeKey": "$context.routeKey", "ip": "$context.identity.sourceIp", "requestTime": "$context.requestTime", "httpMethod": "$context.httpMethod","statusCode": $context.status }'
-    },
-  });
+  }  
 }

@@ -48,7 +48,7 @@ Add a WAF to mitigate common web threats and protect cloudfront distribution by 
     ```
     You should see a `200 OK` response.
 
-  - Optional Step : Log into AWS console and select S3 service, open the trailer S3 bucket(created as part of backend deployment) and upload some movie trailers. Ensure that the file name matches the id field in sample [movie data](project_assets/movies-data.json) (ex:"tt1981115.mp4", "tt0800369.mp4", "tt0172495.mp4"). Uploading a trailer with id "tt0172495.mp4" is used as the default trailer for all movies, without having to upload one for each movie. If this step is ommited , the `movie trailer` functionality will not work.
+  - Optional Step : Log into AWS console and select S3 service, open the trailer S3 bucket(created as part of backend deployment) and upload some movie trailers. Ensure that the file name matches the id field in sample [movie data](project_assets/movies-data.json) (ex:"tt1981115.mp4", "tt0800369.mp4", "tt0172495.mp4"). Uploading a trailer with id "tt0172495.mp4" will be the default trailer for all movies, without having to upload one for each movie. If this step is ommited , the `movie trailer` functionality will not work.
 
 ## Application Flow
 ### Create User Account

@@ -24,20 +24,33 @@ export default class OpenSearchConstruct extends Construct {
     const role = new iam.Role(this, "Role", {
       roleName: "movieCollectionPipelineRole",
       assumedBy: new iam.ServicePrincipal("osis-pipelines.amazonaws.com"),
+      inlinePolicies: {
+        "OpenSearchServerlessAccess": new iam.PolicyDocument({
+          statements: [
+            new iam.PolicyStatement({
+              actions: ["aoss:BatchGetCollection"],
+              resources: [`arn:aws:aoss:${cdk.Aws.REGION}:${cdk.Fn.ref(
+                "AWS::AccountId"
+              )}:collection/*`],
+            }),
+            new iam.PolicyStatement({
+              actions: ["osis:Ingest"],
+              resources: [`arn:aws:osis:${cdk.Aws.REGION}:${cdk.Fn.ref(
+                "AWS::AccountId"
+              )}:pipeline/movie-ingestion`],
+            }),
+          ]
+        })
+      }
     });
 
-    role.addToPolicy(
-      new iam.PolicyStatement({
-        actions: ["aoss:BatchGetCollection"],
-        resources: [movieCollection.attrArn],
-      })
-    );
     role.addToPolicy(
       new iam.PolicyStatement({
         actions: [
           "aoss:CreateSecurityPolicy",
           "aoss:GetSecurityPolicy",
           "aoss:UpdateSecurityPolicy",
+          "aoss:APIAccessAll"
         ],
         resources: ["*"],
         conditions: {

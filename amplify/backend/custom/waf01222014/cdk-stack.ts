@@ -45,6 +45,8 @@ export class cdkStack extends cdk.Stack {
       name: "movies-search-ipsetV4",
     });
 
+    apiIpset.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
+
     const ipRule: wafv2.CfnWebACL.RuleProperty = {
       name: "allowed-ips",
       priority: 1,

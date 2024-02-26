@@ -39,6 +39,20 @@
                   },
                   "-",
                   {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          "-",
+                          {
+                            "Ref": "AWS::StackName"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "-",
+                  {
                     "Ref": "env"
                   }
                 ]
