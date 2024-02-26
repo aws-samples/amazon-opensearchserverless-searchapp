@@ -4,7 +4,9 @@ import { get } from "aws-amplify/api";
 import SearchBox from "./SearchBox";
 import MovieCard from "./MovieCard";
 import { styled } from "@mui/material/styles";
+import { Select, MenuItem, FormControl } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
 
 const MoviesGridContainer = styled("div")({
   display: "flex",
@@ -19,6 +21,28 @@ const PaginationContainer = styled("div")({
   paddingTop: "30px",
 });
 
+const SortingContainer = styled("div")(({ theme }) => ({
+  display: "flex",
+  justifyContent: "flex-end",
+  paddingRight: "150px",
+  paddingBottom: "50px",
+  color: theme.palette.primary.light,
+}));
+
+const SortingSelector = styled(Select)(({ theme }) => ({
+  textAlign: "center",
+  color: theme.palette.primary.dark,
+  backgroundColor: "white",
+  "& .MuiSelect-select": {
+    paddingRight: 24,
+  },
+}));
+
+const ErrorMessageContainer = styled("div")(({ theme }) => ({
+  textAlign: "center",
+  color: theme.palette.primary.light,
+}));
+
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
@@ -27,7 +51,10 @@ const SearchBar = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [fetchTrigger, setFetchTrigger] = useState(false);
-  const pageSize = 6;
+  const [sortOption, setSortOption] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [searchAttempted, setSearchAttempted] = useState(false);
+  const pageSize = 3;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +76,8 @@ const SearchBar = () => {
               query: search,
               from: (currentPage - 1) * pageSize,
               size: pageSize,
+              sortOption: sortOption,
+              sortOrder: sortOrder,
             },
           },
         };
@@ -86,15 +115,23 @@ const SearchBar = () => {
     };
 
     fetchData();
-  }, [search, currentPage, pageSize, fetchTrigger]);
+  }, [search, currentPage, pageSize, fetchTrigger, sortOption, sortOrder]);
 
   const handleSubmit = () => {
     setCurrentPage(1);
     setFetchTrigger(true);
+    setSortOption("");
+    setSortOrder("asc");
+    setSearchAttempted(true);
   };
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
+    setFetchTrigger(true);
+  };
+
+  const toggleSortOrder = () => {
+    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
     setFetchTrigger(true);
   };
 
@@ -107,12 +144,43 @@ const SearchBar = () => {
         setSearch={setSearch}
         handleSubmit={handleSubmit}
       />
+      {data.length === 0 && !isError && searchAttempted && !isLoading && (
+        <ErrorMessageContainer>
+          No results found. Please try another search term.
+        </ErrorMessageContainer>
+      )}
       {data.length > 0 && (
-        <MoviesGridContainer>
-          {data.map((item) => (
-            <MovieCard key={item.id} item={item} />
-          ))}
-        </MoviesGridContainer>
+        <div>
+          <SortingContainer>
+            Sort by
+            <FormControl
+              variant="standard"
+              sx={{ marginLeft: 2, marginRight: 2, minWidth: 120 }}
+            >
+              <SortingSelector
+                value={sortOption}
+                onChange={(e) => {
+                  setSortOption(e.target.value);
+                  setSortOrder("asc");
+                }}
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+              >
+                <MenuItem value="year">Year</MenuItem>
+                <MenuItem value="rating">Rating</MenuItem>
+              </SortingSelector>
+            </FormControl>
+            <SwapVertIcon
+              onClick={toggleSortOrder}
+              style={{ cursor: "pointer" }}
+            />
+          </SortingContainer>
+          <MoviesGridContainer>
+            {data.map((item) => (
+              <MovieCard key={item.id} item={item} />
+            ))}
+          </MoviesGridContainer>
+        </div>
       )}
       {data.length > 0 && totalPages > 1 && (
         <PaginationContainer>

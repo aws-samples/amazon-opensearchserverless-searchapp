@@ -4,8 +4,8 @@ import TrailerPlayer from "./TrailerPlayer";
 import { styled } from "@mui/material/styles";
 
 const MovieCardContainer = styled(Card)({
-  width: 300,
-  height: 500,
+  width: 350,
+  height: 550,
   perspective: "1000px",
   margin: "10px",
   "&:hover .movie-card-inner": {

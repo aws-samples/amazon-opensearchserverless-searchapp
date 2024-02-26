@@ -3,6 +3,7 @@ import { Modal, Box, Button } from "@mui/material";
 import { getUrl } from "aws-amplify/storage";
 import { styled } from "@mui/material/styles";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import CloseIcon from "@mui/icons-material/Close";
 
 const WatchTrailerButton = styled(Button)(({ theme }) => ({
   fontWeight: "bold",
@@ -19,6 +20,35 @@ const TrailerPlayer = (movie_id) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [data, updateData] = useState();
+  
+  const VideoPlayerContainer = styled(Box)(({ theme }) => ({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    verticalAlign: "top",
+    boxSizing: "border-box",
+    color: "#fff",
+    backgroundColor: "#000",
+    position: "relative",
+    padding: "0",
+    fontSize: "10px",
+    lineHeight: 1,
+    fontWeight: "normal",
+    fontStyle: "normal",
+    wordBreak: "initial",
+    width: "100%",
+  }));
+
+  const CloseButton = styled(Button)({
+    position: "absolute",
+    top: 8,
+    right: 8,
+    color: "white",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+    },
+  });
 
   useEffect(() => {
     let key = "Default.mp4";
@@ -43,7 +73,7 @@ const TrailerPlayer = (movie_id) => {
 
   return (
     <div class="trailer">
-      <WatchTrailerButton variation="link" onClick={handleOpen}>
+      <WatchTrailerButton variat="link" onClick={handleOpen}>
         <h3>Watch Trailer</h3>
         <PlayArrowIcon />
       </WatchTrailerButton>
@@ -53,11 +83,14 @@ const TrailerPlayer = (movie_id) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx className="video-player-container">
+        <VideoPlayerContainer sx className="video-player-container">
+          <CloseButton onClick={handleClose}>
+            <CloseIcon />
+          </CloseButton>
           <video autoPlay={true} id="vid1" className="video-player">
             <source src={data} />
           </video>
-        </Box>
+        </VideoPlayerContainer>
       </Modal>
     </div>
   );
