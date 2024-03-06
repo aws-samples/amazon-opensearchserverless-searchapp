@@ -6,7 +6,38 @@ This prototype project is intended to show a way to implement multi dimensional 
 ### Prerequisite
 
 - Install [Nodejs](https://nodejs.org/en/download/) Latest LTS Version. (Project uses Nodejs 20.11.0 and npm 10.2.4)
-- Install [Amplify CLI](https://docs.amplify.aws/react/start/getting-started/installation/#install-the-amplify-cli).
+- Install [Amplify CLI](https://docs.amplify.aws/react/start/getting-started/installation/#install-the-amplify-cli) and  [configure](https://docs.amplify.aws/javascript/tools/cli/start/set-up-cli/#configure-the-amplify-cli). At the end of configuration you should successfully set up the new User - `amplify-dev`'s accessKeyId and secretAccessKey into your local machine's AWS profile.
+- Amplify user requires additional permissions inorder to deploy the AWS resources. Follow the steps below to create a new inline IAM policy and attach it to the user.
+  - Open AWS Console , select Identity and Access Management (IAM) service and click on Users link on the left tab.
+
+    <img src="project_assets/add_policy_1.png" alt="drawing" style="width:300px;"/>
+
+  - Click on `amplify-dev` user link to view the IAM Permissions policies.
+
+    <img src="project_assets/add_policy_2.png" alt="drawing" style="width:300px;"/>
+  
+  - Click on `Add permissions` dropdown and choose `Create Inline policy` option.
+
+    <img src="project_assets/add_policy_3.png" alt="drawing" style="width:300px;"/>
+  
+  - It opens up the policy editor, click on `JSON`, you should see default IAM statement in JSON format.
+
+    <img src="project_assets/add_policy_4.png" alt="drawing" style="width:300px;"/>
+  
+  - Copy the file contents in [AddionalPermissions-Amplify](project_assets/AdditionalPermissions-Amplify.json), replacing the tags with your target region, account and env. Note that the actions in the IAM statement are largely open (`*`) but restricted/limited by the target resources, this is done to satisfy the the maximum inline-policy length(2048 characters). Paste the updated JSON into the policy editor and click `Next`.
+
+    <img src="project_assets/add_policy_5.png" alt="drawing" style="width:300px;"/>
+  
+  - Provide the policy name - `AddionalPermissions-Amplify` and click `Create Policy` button.
+
+    <img src="project_assets/add_policy_6.png" alt="drawing" style="width:300px;"/>
+
+    <img src="project_assets/add_policy_7.png" alt="drawing" style="width:300px;"/>
+
+  - You should now see the new inline-policy attached to the user.
+
+    <img src="project_assets/add_policy_8.png" alt="drawing" style="width:300px;"/>
+  
 - Install [awscurl](https://github.com/okigan/awscurl) for data ingestion.
 
 ### Backend
@@ -16,7 +47,7 @@ This prototype project is intended to show a way to implement multi dimensional 
 - Repeat the dependency installation in these folders  - amplify/backend/custom/opensearchserverless, amplify/backend/custom/waf01222014
   and amplify/backend/function/moviesearch56199296
 - Run `amplify init` command to initialize the [amplify](https://docs.amplify.aws/javascript/tools/cli/start/key-workflows/#amplify-init) project based on the contents of the directory.
-- Update the ip-address of your machine in the WAF rules to allow traffic from the ip-set [here](amplify/backend/custom/waf01222014/cdk-stack.ts)(line 41).
+- Replace the [placeholder](amplify/backend/custom/waf01222014/cdk-stack.ts)(line 41) with the ip-address of your machine, this whitelists the source ip-address to allow traffic into API-Gateway.
 - Run `amplify push` to build and deploy the backend resources, resource list would be as below.
     ![Alt text](project_assets/aws_cli_push.png)
 
@@ -48,7 +79,7 @@ Add a WAF to mitigate common web threats and protect cloudfront distribution by 
     ```
     You should see a `200 OK` response.
 
-  - Optional Step : Log into AWS console and select S3 service, open the trailer S3 bucket(created as part of backend deployment) and upload some movie trailers. Ensure that the file name matches the id field in sample [movie data](project_assets/movies-data.json) (ex:"tt1981115.mp4", "tt0800369.mp4", "tt0172495.mp4"). Uploading a trailer with id "tt0172495.mp4" is used as the default trailer for all movies, without having to upload one for each movie. If this step is ommited , the `movie trailer` functionality will not work.
+  - Optional Step : Log into AWS console and select S3 service, open the trailer S3 bucket(created as part of backend deployment) and upload some movie trailers. Ensure that the file name matches the id field in sample [movie data](project_assets/movies-data.json) (ex:"tt1981115.mp4", "tt0800369.mp4", "tt0172495.mp4"). Uploading a trailer with id "tt0172495.mp4" will be the default trailer for all movies, without having to upload one for each movie. If this step is ommited , the `movie trailer` functionality will not work.
 
 ## Application Flow
 ### Create User Account
@@ -98,5 +129,4 @@ Add a WAF to mitigate common web threats and protect cloudfront distribution by 
     <img src="project_assets/app_pagination.png" alt="drawing" style="width:300px;"/>
 
 ## Cleanup
-- Pull the backend environment associated with the application to your local environment by running `amplify pull` command.
 - Within the project directory, run the `amplify delete` command.

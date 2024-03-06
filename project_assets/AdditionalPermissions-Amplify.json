@@ -1,0 +1,101 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Sid": "LambdaPermissions",
+          "Effect": "Allow",
+          "Action": [
+              "lambda:PutFunctionConcurrency"
+          ],
+          "Resource": "arn:aws:lambda:<region>:<account>:function:moviesearch56199296-<env>"
+      },
+      {
+          "Sid": "IPSetPermissions",
+          "Effect": "Allow",
+          "Action": "wafv2:*",
+          "Resource": [
+              "arn:aws:wafv2:<region>:<account>:regional/ipset/movies-search-ipsetV4*",
+              "arn:aws:wafv2:<region>:<account>:regional/webacl/apiregionalacl*"
+          ]
+      },
+      {
+          "Sid": "WAFListPermissions",
+          "Effect": "Allow",
+          "Action": [
+              "wafv2:GetWebACLForResource"
+          ],
+          "Resource": "arn:aws:wafv2:<region>:<account>:regional/webacl*"
+      },
+      {
+          "Sid": "APIWAFPermissions",
+          "Effect": "Allow",
+          "Action": [
+              "apigateway:SetWebACL"
+          ],
+          "Resource": "arn:aws:apigateway:<region>::/restapis/*/stages/*"
+      },
+      {
+          "Sid": "CloudwatchPermissions",
+          "Effect": "Allow",
+          "Action": "logs:*",
+          "Resource": [
+              "*"
+          ]
+      },
+      {
+          "Sid": "SSMParamPermissions",
+          "Effect": "Allow",
+          "Action": "ssm:*",
+          "Resource": [
+              "arn:aws:ssm:<region>:<account>:parameter/aoss/*"
+          ]
+      },
+      {
+          "Sid": "IngestionPermissions",
+          "Effect": "Allow",
+          "Action": "osis:*",
+          "Resource": [
+              "arn:aws:osis:<region>:<account>:pipeline/movie-ingestion*"
+          ]
+      },
+      {
+          "Sid": "OpenSearchServerlessCollectionPermissions",
+          "Effect": "Allow",
+          "Action": "aoss:*",
+          "Resource": "*",
+          "Condition": {
+              "StringEquals": {
+                  "aoss:collection": "movie-collection"
+              }
+          }
+      },
+      {
+          "Sid": "OpenSearchServerlessPermissions",
+          "Effect": "Allow",
+          "Action": "aoss:*",
+          "Resource": "*",
+          "Condition": {
+              "StringLike": {
+                  "aoss:index": "movie-collection/*"
+              }
+          }
+      },
+      {
+          "Resource": "arn:aws:aoss:<region>:<account>:collection/*",
+          "Action": [
+              "aoss:CreateCollection",
+              "aoss:DeleteCollection",
+              "aoss:UpdateCollection",
+              "aoss:BatchGetCollection",
+              "aoss:ListCollections",
+              "aoss:CreateAccessPolicy",
+              "aoss:DeleteAccessPolicy",
+              "aoss:CreateSecurityPolicy",
+              "aoss:DeleteSecurityPolicy",
+              "aoss:TagResource"
+          ],
+          "Effect": "Allow",
+          "Sid": "OpenSearchServerlessRootPermissions"
+      }
+  ]
+}
