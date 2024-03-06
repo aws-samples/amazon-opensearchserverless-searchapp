@@ -52,12 +52,9 @@ export default class OpenSearchConstruct extends Construct {
           "aoss:UpdateSecurityPolicy",
           "aoss:APIAccessAll"
         ],
-        resources: ["*"],
-        conditions: {
-          StringEquals: {
-            "aoss:collection": movieCollection.attrId,
-          },
-        },
+        resources: [`arn:aws:aoss:${cdk.Aws.REGION}:${cdk.Fn.ref(
+          "AWS::AccountId"
+        )}:collection/*`],
       })
     );
 
