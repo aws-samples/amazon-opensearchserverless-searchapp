@@ -7,7 +7,7 @@ This prototype project is intended to show a way to implement multi dimensional 
 
 - Install [Nodejs](https://nodejs.org/en/download/) Latest LTS Version. (Project uses Nodejs 20.11.0 and npm 10.2.4)
 - Install [Amplify CLI](https://docs.amplify.aws/react/start/getting-started/installation/#install-the-amplify-cli) and  [configure](https://docs.amplify.aws/javascript/tools/cli/start/set-up-cli/#configure-the-amplify-cli). At the end of configuration you should successfully set up the new User - `amplify-dev`'s accessKeyId and secretAccessKey into your local machine's AWS profile.
-- Amplify user requires additional permissions inorder to deploy the AWS resources. Follow the steps below to create a new inline IAM policy and attach it to the user.
+- Amplify user requires additional permissions in order to deploy the AWS resources. Follow the steps below to create a new inline IAM policy and attach it to the user.
   - Open AWS Console , select Identity and Access Management (IAM) service and click on Users link on the left tab.
 
     <img src="project_assets/add_policy_1.png" alt="drawing" style="width:300px;"/>
@@ -24,7 +24,7 @@ This prototype project is intended to show a way to implement multi dimensional 
 
     <img src="project_assets/add_policy_4.png" alt="drawing" style="width:300px;"/>
   
-  - Copy the file contents in [AddionalPermissions-Amplify](project_assets/AdditionalPermissions-Amplify.json), replacing the tags with your target region, account and env. Note that the actions in the IAM statement are largely open (`*`) but restricted/limited by the target resources, this is done to satisfy the the maximum inline-policy length(2048 characters). Paste the updated JSON into the policy editor and click `Next`.
+  - Copy the file contents in [AddionalPermissions-Amplify](project_assets/AdditionalPermissions-Amplify.json), replacing the tags with your target region, account and env (Note: This is the env name needs to be use when performing amplify init when bringing up the backend). Note that the actions in the IAM statement are largely open (`*`) but restricted/limited by the target resources, this is done to satisfy the the maximum inline-policy length(2048 characters). Paste the updated JSON into the policy editor and click `Next`.
 
     <img src="project_assets/add_policy_5.png" alt="drawing" style="width:300px;"/>
   
@@ -44,10 +44,10 @@ This prototype project is intended to show a way to implement multi dimensional 
 
 - Clone this repository to your local computer.
 - In the terminal, from the amplify/backend folder execute `npm install` to install all dependencies.
-- Repeat the dependency installation in these folders  - amplify/backend/custom/opensearchserverless, amplify/backend/custom/waf01222014
+- Repeat the dependency installation using `npm install` in these folders  - amplify/backend/custom/opensearchserverless, amplify/backend/custom/waf01222014
   and amplify/backend/function/moviesearch56199296
-- Run `amplify init` command to initialize the [amplify](https://docs.amplify.aws/javascript/tools/cli/start/key-workflows/#amplify-init) project based on the contents of the directory.
-- Replace the [placeholder](amplify/backend/custom/waf01222014/cdk-stack.ts)(line 41) with the ip-address of your machine, this whitelists the source ip-address to allow traffic into API-Gateway.
+- From the project's root folder, Run `amplify init` command to initialize the [amplify](https://docs.amplify.aws/javascript/tools/cli/start/key-workflows/#amplify-init) project based on the contents of the directory.
+- Replace the "xx.xx.xx.xx/32" from [waf ip set](amplify/backend/custom/waf01222014/cdk-stack.ts)(line 41) with the ip-address of your machine, this whitelists the source ip-address to allow traffic into API-Gateway.
 - Run `amplify push` to build and deploy the backend resources, resource list would be as below.
     ![Alt text](project_assets/aws_cli_push.png)
 
@@ -56,7 +56,6 @@ This prototype project is intended to show a way to implement multi dimensional 
 ### Frontend
 - From the project's root folder, run `npm install` to install the frontend dependencies.
 - Optionally, you can run `npm audit --production` to check on vulnerabilities in the packages and fix them.
-- Run `npm run start` to launch the react application locally from the browser. The required configurations to backend resources like API, Cognito etc will be in <B>amplifyconfiguration.json</B>. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 - To publish the frontend react application on to cloudfront, run `amplify publish`.
 
 ### Note
@@ -79,7 +78,11 @@ Add a WAF to mitigate common web threats and protect cloudfront distribution by 
     ```
     You should see a `200 OK` response.
 
-  - Optional Step : Log into AWS console and select S3 service, open the trailer S3 bucket(created as part of backend deployment) and upload some movie trailers. Ensure that the file name matches the id field in sample [movie data](project_assets/movies-data.json) (ex:"tt1981115.mp4", "tt0800369.mp4", "tt0172495.mp4"). Uploading a trailer with id "tt0172495.mp4" will be the default trailer for all movies, without having to upload one for each movie. If this step is ommited , the `movie trailer` functionality will not work.
+  - Log into AWS console and select S3 service, open the trailer S3 bucket(created as part of backend deployment), create the folder called public in the bucket and upload some movie trailers. Ensure that the file name matches the id field in sample [movie data](project_assets/movies-data.json) (ex:"tt1981115.mp4", "tt0800369.mp4", "tt0172495.mp4"). Uploading a trailer with id "Default.mp4" will be the default trailer for all movies, without having to upload one for each movie. If this step is ommited , the `movie trailer` functionality will not work.
+
+  - Run `npm run start` to launch the react application locally from the browser. The required configurations to backend resources like API, Cognito etc will be in <B>amplifyconfiguration.json</B>. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+  - Alternatively Access the application using Cloudfront URL by using the hosting endpoint generated during after `amplify publish`. 
 
 ## Application Flow
 ### Create User Account
