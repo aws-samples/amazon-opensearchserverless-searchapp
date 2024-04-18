@@ -85,7 +85,9 @@ export default class OpenSearchConstruct extends Construct {
         name: "movie-collection-data-access",
         policy: `[{"Description": "Data Access", "Rules":[{"ResourceType":"index","Resource":["index/${collectionName}/*"],"Permission":["aoss:*"]}, {"ResourceType":"collection","Resource":["collection/${collectionName}"],"Permission":["aoss:*"]}], "Principal":["${lambdaRoleArn}","arn:aws:iam::${cdk.Fn.ref(
           "AWS::AccountId"
-        )}:role/Admin","${role.roleArn}"]}]`,
+        )}:role/Admin","${role.roleArn}","arn:aws:iam::${cdk.Fn.ref(
+          "AWS::AccountId"
+        )}:user/amplify-dev"]}]`,
         type: "data",
       }
     );
